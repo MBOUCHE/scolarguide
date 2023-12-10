@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+    <!-- Our Services Area -->
+    <section class="our_services_area">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>établissements reconnus par le ministère</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="portfolio_inner_area">
+                <div class="portfolio_filter">
+                    <ul>
+                        <li data-filter="*" class="active"><a href=""> TOUT</a></li>
+                        <li data-filter=".Francophone"><a href="">Francophone</a></li>
+                        <li data-filter=".Anglophone"><a href="">Anglophone</a></li>
+                        <li data-filter=".BILINGUE"><a href="">Bilingue</a></li>
+                        <li data-filter=".PRIVEE"><a href="">Privée</a></li>
+                        <li data-filter=".PUBLIC"><a href="">Publique</a></li>
+                        <li data-filter=".CATHOLIQUE"><a href="">Catholique</a></li>
+                        <li data-filter=".ISLAMIQUE"><a href="">Islamique</a></li>
+                        <li data-filter=".PROTESTANT"><a href="">Protestant</a></li>
+                        <li data-filter=".LAÎC"><a href="">Laic</a></li>
+                    </ul>
+                </div>
+                <div class="portfolio_item">
+                   <div class="grid-sizer"></div>
+                    {% for school in schools %}
+                    <div class="single_facilities col-xs-4 p0 {{school.system_sch}} {{school.order.name_ord}} {{school.arrondissement.name_arr}}">
+                       <div class="single_facilities_inner">
+                          	<img style="width: 370px; height: 250px" src="{% static ''%}{{school.img_sch}}" alt="">
+
+                            <!-- Button trigger modal -->
+                            <button style="border-radius:0%; margin:1.7%; width:94%" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{school.id}}">
+                                <h4>{{school.name_sch}}</h4>
+
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal{{school.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{school.id}}">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content" style="margin-top:20%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h5 class="modal-title" id="myModalLabel{{school.id}}">{{school}}</h5>
+                                        </div>
+                                        <div class="modal-body row">
+                                            <div class="col-md-6"><img style="width: 370px; height: 300px" src="{% static ''%}{{school.img_sch}}" alt=""></div>
+                                            <div class="col-md-6">{{school.desc_sch}}</div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a style="border-radius:0%;" class="col-md-2  btn btn-success" href="{% url 'publicDetails' school.id%}">Consulter</a>
+                                            <a style="border-radius:0%;" class="col-md-2 btn btn-danger" href="{% url 'publicMapSchool' school.id%}">Mapper</a>
+                                            <button style="border-radius:0%;" type="button" class="col-md-2 btn btn-warning" data-dismiss="modal">Fermer</button>
+                                            <button style="border-radius:0%;" type="button" class="col-md- btn btn-primary">Ajouter un commentaire</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="gallery_hover" style="height: 50%">
+                                <h4 style="margin-top:-30%">{{school.name_sch}}</h4>
+                                <ul>
+                                    <li><a href="{% url 'publicDetails' school.id%}"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                    <li><a href="{% url 'publicMapSchool' school.id%}"><i class="fa fa-map" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Services Area -->
+
+    <!-- Footer Area -->
+{% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+
+</body>
+</html>
